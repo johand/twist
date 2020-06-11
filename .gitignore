@@ -6,3 +6,11 @@ tmp/
 public/system
 repos
 dump.rdb
+
+# Ignore application configuration
+/config/application.yml
+
+# Temp files
+*~
+*#
+.\#*

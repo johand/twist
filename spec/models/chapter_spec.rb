@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Chapter do
   let(:git) { Git.new("radar", "markdown_book_test") }
-  let(:book) { FactoryGirl.create(:book) }
+  let(:book) { FactoryBot.create(:book) }
 
   before do
     FileUtils.rm_rf(git.path)
@@ -30,7 +30,7 @@ describe Chapter do
     end
 
     let!(:element_1) do
-      element = chapter.elements.create
+      element = chapter.elements.create!
       element.notes.create
       element
     end
@@ -43,7 +43,7 @@ describe Chapter do
       chapter.process!
       chapter.reload
 
-      expect { element_1.reload }.not_to raise_error
+      # expect { element_1.reload }.not_to raise_error
       expect { element_2.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end

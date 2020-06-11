@@ -1,11 +1,9 @@
 source 'http://rubygems.org'
 
-ruby '2.3.3'
-
-gem 'rails', '~> 5.0'
+gem 'rails', '~> 5.2.4.3'
 gem 'pg'
 
-gem 'devise', '4.1.1'
+gem 'devise'
 gem 'sidekiq', '4.1.2'
 gem 'redcarpet'
 gem 'nokogiri'
@@ -13,10 +11,12 @@ gem 'paperclip'
 gem 'pygments.rb'
 
 gem 'redis-activesupport', '5.0.1'
+gem 'bootsnap', require: false
+gem 'figaro'
 
 group :development, :test do
   gem 'pry-rails'
-  gem 'factory_girl'
+  gem 'factory_bot'
   gem 'capybara', '~> 2.0'
   gem 'rspec-rails', '~> 3.5.0'
   gem 'launchy'
@@ -30,6 +30,7 @@ group :development do
   gem 'capistrano-bundler', '1.1.4'
   gem 'capistrano-rails', '1.1.3'
   gem 'capistrano-chruby'
+  gem 'listen'
 end
 
 gem "unicorn"
@@ -38,9 +39,7 @@ gem "unicorn"
 gem 'sass-rails', "~> 5.0.6"
 gem 'coffee-script'
 gem 'bootstrap-sass', '~> 3.3.6'
-gem 'simple_form', '3.2.1'
+gem 'simple_form'
 
 gem 'jquery-rails'
 gem 'pry'
-
-gem 'dotenv-rails'

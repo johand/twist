@@ -4,7 +4,7 @@ module NotesHelper
     if user && !Rails.env.test?
       image_tag "http://gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email)}?s=140"
     else
-      image_tag "missing.png"
+      image_tag "missing.png", skip_pipeline: true
     end
   end
 
