@@ -1,11 +1,11 @@
 development:
   adapter: postgresql
   database: twist_dev
-  username: <%= ENV['dev_username'] %>
-  password: <%= ENV['dev_password'] %>
+  username: <%= ENV['db_username'] %>
+  password: <%= ENV['db_password'] %>
 
 test:
   adapter: postgresql
   database: twist_test
-  username: <%= ENV['test_username'] %>
-  password: <%= ENV['test_password'] %>
+  username: <%= ENV['db_username'] %>
+  password: <%= ENV['db_password'] %>
