@@ -2,7 +2,10 @@ Twist::Application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   devise_for :users
 
-  root to: "books#index"
+  root to: 'home#index'
+
+  get '/accounts/new', to: 'accounts#new', as: :new_account
+  post '/accounts', to: 'accounts#create', as: :accounts
 
   notes_routes = lambda do
     collection do
@@ -34,5 +37,5 @@ Twist::Application.routes.draw do
     resources :notes, &notes_routes
   end
 
-  get 'signed_out', to: "users#signed_out"
+  get 'signed_out', to: 'users#signed_out'
 end

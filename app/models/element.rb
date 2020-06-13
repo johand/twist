@@ -1,4 +1,4 @@
-class Element < ActiveRecord::Base
+class Element < ApplicationRecord
   extend Processor
 
   belongs_to :chapter

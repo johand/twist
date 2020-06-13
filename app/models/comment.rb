@@ -1,9 +1,9 @@
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :note
 
   validates :text, presence: true
-  
+
   # Send email notifications to all people "subscribed" to this note.
   def send_notifications!
     CommentNotifier.perform_async(self.id, notification_emails)
