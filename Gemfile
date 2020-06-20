@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 ruby '2.7.1'
 
-gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
+gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'pg'
 
 gem 'devise'
@@ -18,13 +18,16 @@ gem 'figaro'
 
 group :development, :test do
   gem 'pry-rails'
-  gem 'factory_bot'
-  gem 'capybara'
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'capybara'
+end
+
+group :test do
   gem 'launchy'
+  gem 'factory_bot'
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'poltergeist'
+  gem 'webdrivers', '~> 4.0'
 end
 
 group :development do

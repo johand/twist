@@ -8,7 +8,7 @@ options = {
 
 case Rails.env
 when 'development', 'test'
-  options.merge!(domain: 'localhost')
+  options.merge!(domain: 'lvh.me')
 when 'production'
   # TBA
 end

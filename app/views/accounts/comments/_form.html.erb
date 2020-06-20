@@ -2,12 +2,12 @@
   <div class="comment_form">
     <strong>Comment on this note (Markdown enabled)</strong>
     <p>
-      <% if current_user.author? %>
+      <% if owner? %>
         <% if @note.completed? %>
-          <%= f.submit "Reopen", :class => "reopen-button" %>
+          <%= f.submit "Reopen", class: "reopen-button" %>
         <% else %>
-          <%= f.submit "Accept", :class => "btn btn-primary", :tabindex => 2 %>
-          <%= f.submit "Reject", :class => "btn btn-danger", :tabindex => 3 %>
+          <%= f.submit "Accept", class: "btn btn-primary", tabindex: 2 %>
+          <%= f.submit "Reject", class: "btn btn-danger", tabindex: 3 %>
         <% end %>
       <% end %>
     </p>
@@ -18,6 +18,6 @@
 
   </div>
   <p>
-    <%= f.submit "Leave Comment", class: "btn btn-primary comment-button", :tabindex => 5 %>
+    <%= f.submit "Leave Comment", class: "btn btn-primary comment-button", tabindex: 5 %>
   </p>
 <% end %>
