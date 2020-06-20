@@ -1,4 +1,4 @@
-class Book < ActiveRecord::Base
+class Book < ApplicationRecord
 
   has_many :chapters
   has_many :notes, through: :chapters

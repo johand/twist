@@ -1,15 +1,15 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
 require 'spec_helper'
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'sidekiq/testing'
-Sidekiq::Testing.inline!
 
-require 'capybara/poltergeist'
-Capybara.javascript_driver = :poltergeist
+Sidekiq::Testing.inline!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -25,14 +25,13 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.mock_with :rspec
 
-
   config.before do
     ActionMailer::Base.deliveries.clear
   end
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.clean_with :truncation, except: %w(ar_internal_metadata)
+    DatabaseCleaner.clean_with :truncation, except: %w[ar_internal_metadata]
   end
 
   config.around(:each) do |example|
@@ -41,21 +40,10 @@ RSpec.configure do |config|
     end
   end
 
-  config.filter_gems_from_backtrace(
-    "actionpack",
-    "actionview",
-    "activerecord",
-    "activesupport",
-    "capybara",
-    "rack",
-    "rack-test",
-    "railties",
-    "request_store",
-    "warden",
-    "zeus"
-  )
-
   config.infer_spec_type_from_file_location!
 
   config.include Warden::Test::Helpers, type: :feature
+
+  Capybara.javascript_driver = :selenium_chrome_headless
+  Capybara.app_host = 'http://lvh.me'
 end

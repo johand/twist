@@ -1,13 +1,13 @@
-class Note < ActiveRecord::Base
+class Note < ApplicationRecord
   belongs_to :element, counter_cache: true
   has_many :comments
 
   accepts_nested_attributes_for :comments
 
   delegate :chapter, to: :element
-  
+
   belongs_to :user
-  
+
   def to_param
     number.to_s
   end
