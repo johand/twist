@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_15_034125) do
+ActiveRecord::Schema.define(version: 2020_07_03_225251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(version: 2020_06_15_034125) do
     t.index ["chapter_id"], name: "index_images_on_chapter_id"
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.string "email"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_invitations_on_account_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.text "text"
     t.integer "element_id"
@@ -115,4 +123,5 @@ ActiveRecord::Schema.define(version: 2020_06_15_034125) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "invitations", "accounts"
 end
