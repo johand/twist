@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_03_225251) do
+ActiveRecord::Schema.define(version: 2020_07_05_232207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,15 @@ ActiveRecord::Schema.define(version: 2020_07_03_225251) do
     t.index ["account_id"], name: "index_invitations_on_account_id"
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_memberships_on_account_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "notes", force: :cascade do |t|
     t.text "text"
     t.integer "element_id"
@@ -124,4 +133,6 @@ ActiveRecord::Schema.define(version: 2020_07_03_225251) do
   end
 
   add_foreign_key "invitations", "accounts"
+  add_foreign_key "memberships", "accounts"
+  add_foreign_key "memberships", "users"
 end
