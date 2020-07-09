@@ -30,6 +30,6 @@ module Twist
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    config.cache_store = :redis_store
+    config.cache_store = :redis_cache_store
   end
 end
