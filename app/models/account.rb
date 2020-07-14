@@ -5,4 +5,7 @@ class Account < ApplicationRecord
   accepts_nested_attributes_for :owner
 
   validates :subdomain, presence: true, uniqueness: true
+  has_many :invitations
+  has_many :memberships
+  has_many :users, through: :memberships
 end

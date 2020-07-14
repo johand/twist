@@ -21,6 +21,7 @@ Bundler.require(*Rails.groups)
 
 module Twist
   class Application < Rails::Application
+    config.active_job.queue_adapter = :sidekiq
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
@@ -29,6 +30,6 @@ module Twist
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
-    config.cache_store = :redis_store
+    config.cache_store = :redis_cache_store
   end
 end
