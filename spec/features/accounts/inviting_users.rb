@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 feature 'Inviting users' do
@@ -10,6 +12,7 @@ feature 'Inviting users' do
   end
 
   scenario 'invites a user successfully' do
+    click_link 'Users'
     click_link 'Invite User'
     fill_in 'Email', with: 'test@example.com'
     click_button 'Invite User'
