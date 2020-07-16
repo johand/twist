@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Chapter do
-  let(:git) { Git.new("radar", "markdown_book_test") }
-  let(:book) { FactoryBot.create(:book) }
+  let(:git) { Git.new('radar', 'markdown_book_test') }
+  let(:account) { FactoryBot.create(:account) }
+  let(:book) { account.books.create(title: 'Markdown Book Test') }
 
   before do
     FileUtils.rm_rf(git.path)
@@ -10,10 +13,10 @@ describe Chapter do
     book.path = 'spec/fixtures/repos/radar/markdown_book_test'
   end
 
-  it "can process markdown" do
+  it 'can process markdown' do
     chapter = book.chapters.find_or_create_by(
-      file_name: "chapter_1/chapter_1.markdown",
-      part: "mainmatter"
+      file_name: 'chapter_1/chapter_1.markdown',
+      part: 'mainmatter'
     )
 
     expect do
@@ -21,11 +24,11 @@ describe Chapter do
     end.not_to raise_error
   end
 
-  context "updating an existing chapter" do
+  context 'updating an existing chapter' do
     let(:chapter) do
       book.chapters.create!(
-        title: "Introduction",
-        file_name: "chapter_1/chapter_1.markdown"
+        title: 'Introduction',
+        file_name: 'chapter_1/chapter_1.markdown'
       )
     end
 
@@ -39,7 +42,7 @@ describe Chapter do
       chapter.elements.create
     end
 
-    it "keeps elements with notes" do
+    it 'keeps elements with notes' do
       chapter.process!
       chapter.reload
 
@@ -48,86 +51,86 @@ describe Chapter do
     end
   end
 
-  context "navigation" do
-    context "chapter 1" do
+  context 'navigation' do
+    context 'chapter 1' do
       let(:chapter) do
         book.chapters.find_or_create_by(
-          file_name: "chapter_1/chapter_1.markdown",
+          file_name: 'chapter_1/chapter_1.markdown',
           position: 1,
-          part: "mainmatter"
+          part: 'mainmatter'
         )
       end
 
-      it "links back to only chapter in previous part" do
+      it 'links back to only chapter in previous part' do
         introduction = book.chapters.create(
-          title: "Introduction",
+          title: 'Introduction',
           position: 1,
-          part: "frontmatter"
+          part: 'frontmatter'
         )
 
         expect(chapter.previous_chapter).to eq(introduction)
       end
 
-      it "links back to highest positioned chapter in previous part" do
+      it 'links back to highest positioned chapter in previous part' do
         introduction = book.chapters.create(
-          title: "Introduction",
+          title: 'Introduction',
           position: 1,
-          part: "frontmatter"
+          part: 'frontmatter'
         )
 
         foreword = book.chapters.create(
-          title: "Introduction",
+          title: 'Introduction',
           position: 2,
-          part: "frontmatter"
+          part: 'frontmatter'
         )
 
         expect(chapter.previous_chapter).to eq(foreword)
       end
 
 
-      it "links to next chapter in same part" do
+      it 'links to next chapter in same part' do
         chapter_2 = book.chapters.create(
-          title: "Chapter 2",
+          title: 'Chapter 2',
           position: 2,
-          part: "mainmatter"
+          part: 'mainmatter'
         )
 
         expect(chapter.next_chapter).to eq(chapter_2)
       end
     end
 
-    context "last chapter of part" do
+    context 'last chapter of part' do
       let!(:chapter_1) do
         book.chapters.find_or_create_by(
-          file_name: "chapter_1/chapter_1.markdown",
+          file_name: 'chapter_1/chapter_1.markdown',
           position: 1,
-          part: "mainmatter"
+          part: 'mainmatter'
         )
       end
 
       let!(:chapter_2) do
         book.chapters.find_or_create_by(
-          file_name: "chapter_2/chapter_2.markdown",
+          file_name: 'chapter_2/chapter_2.markdown',
           position: 2,
-          part: "mainmatter"
+          part: 'mainmatter'
         )
       end
 
-      it "links back to previous chapter" do
+      it 'links back to previous chapter' do
         expect(chapter_2.previous_chapter).to eq(chapter_1)
       end
 
-      it "links to first chapter in next part" do
+      it 'links to first chapter in next part' do
         appendix_a = book.chapters.create(
-          title: "Appendix A",
+          title: 'Appendix A',
           position: 1,
-          part: "backmatter"
+          part: 'backmatter'
         )
 
         appendix_b = book.chapters.create(
-          title: "Appendix B",
+          title: 'Appendix B',
           position: 2,
-          part: "backmatter"
+          part: 'backmatter'
         )
 
         expect(chapter_2.next_chapter).to eq(appendix_a)
