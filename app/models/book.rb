@@ -1,5 +1,7 @@
-class Book < ApplicationRecord
+# frozen_string_literal: true
 
+class Book < ApplicationRecord
+  belongs_to :account
   has_many :chapters
   has_many :notes, through: :chapters
   before_create :set_permalink
