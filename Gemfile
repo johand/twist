@@ -17,6 +17,7 @@ gem 'pygments.rb'
 gem 'redis-activesupport'
 gem 'bootsnap', require: false
 gem 'figaro'
+gem 'stripe'
 
 group :development, :test do
   gem 'pry-rails'
